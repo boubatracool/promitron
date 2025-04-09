@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'un utilisateur{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-6">
+            {% for flash_error in app.flashes('verify_email_error') %}
+                <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+            {% endfor %}
+
+            <h1>Création d'un utilisateur</h1>
+
+            {{ form_errors(registrationForm) }}
+
+            {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.firstname) }}
+            {{ form_row(registrationForm.lastname) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.username) }}
+            {#        {{ form_row(registrationForm.plainPassword, {label: 'Password'}) }} #}
+            {#        {{ form_row(registrationForm.agreeTerms) }} #}
+
+            <button type="submit" class="btn btn-primary">
+                Enregistrer
+            </button>
+            {{ form_end(registrationForm) }}
+        </div>
+
+    </div>
+
+{% endblock %}

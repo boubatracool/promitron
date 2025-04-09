@@ -1,7 +1,7 @@
-Symfony Demo Application
+Promitron Application
 ========================
 
-The "Symfony Demo Application" is a reference application created to show how
+The "Promitron Application" is a reference application created to show how
 to develop applications following the [Symfony Best Practices][1].
 
 You can also learn about these practices in [the official Symfony Book][5].
@@ -29,7 +29,7 @@ symfony new --demo my_project
 on your computer to run these commands:
 
 ```bash
-# you can create a new project based on the Symfony Demo project...
+# you can create a new project based on the Promitron project...
 composer create-project symfony/symfony-demo my_project
 
 # ...or you can clone the code repository and install its dependencies

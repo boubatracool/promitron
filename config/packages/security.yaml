@@ -37,12 +37,16 @@ security:
                 enable_csrf: true
                 # The page users are redirect to when there is no previous page stored in the
                 # session (for example when the users access directly to the login page).
-                default_target_path: blog_index
+                default_target_path: app_dashboard
+
+            login_throttling:
+                max_attempts: 3
+                interval: '1 minute'
 
             # This option allows users to choose to stay logged in for longer than
             # the session lasts using a cookie. Reference: https://symfony.com/doc/current/security/remember_me.html
             remember_me:
-                secret:   '%kernel.secret%' # required
+                secret: '%kernel.secret%' # required
                 lifetime: 604800 # 1 week in seconds
                 # by default, the feature is enabled by checking a checkbox in the
                 # login form , uncomment the following line to always enable it.
@@ -50,7 +54,7 @@ security:
 
             logout:
                 # The name of the route to redirect to after logging out
-                target: homepage
+                target: security_login
                 # Secure the logout against CSRF
                 enable_csrf: true
 
@@ -65,11 +69,17 @@ security:
     access_control:
         # this is a catch-all for the admin area
         # additional security lives in the controllers
+        - { path: '^/login', roles: PUBLIC_ACCESS }
+        - { path: '^/{_locale}/login', roles: PUBLIC_ACCESS }
         - { path: '^/{_locale}/admin', roles: ROLE_ADMIN }
+    #        - { path: '^/{_locale}/', roles: IS_AUTHENTICATED_FULLY }
+#        - { path: '^/', roles: ROLE_USER }
+
 
     # The ROLE_ADMIN role inherits from the ROLE_USER role
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN: [ ROLE_ADMIN ]
 
 when@test:
     # this configuration simplifies testing URLs protected by the security mechanism

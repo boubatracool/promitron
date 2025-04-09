@@ -58,7 +58,7 @@
 
             <trans-unit id="title.homepage">
                 <source>title.homepage</source>
-                <target><![CDATA[<strong>Symfony Demo</strong> अनुप्रयोगमा स्वागत छ]]></target>
+                <target><![CDATA[<strong>Promitron</strong> अनुप्रयोगमा स्वागत छ]]></target>
             </trans-unit>
             <trans-unit id="title.source_code">
                 <source>title.source_code</source>

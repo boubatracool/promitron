@@ -14,6 +14,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -30,6 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: 'symfony_demo_user')]
+#[UniqueEntity(fields: ['username'], message: "Il existe déjà un compte avec ce nom d'utilisateur")]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     // We can use constants for roles to find usages all over the application rather
@@ -44,15 +46,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(type: Types::STRING)]
-    #[Assert\NotBlank]
     private ?string $fullName = null;
 
     #[ORM\Column(type: Types::STRING, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 50)]
-    private ?string $username = null;
+    private ?string $username;
 
     #[ORM\Column(type: Types::STRING, unique: true)]
+    #[Assert\NotBlank]
     #[Assert\Email]
     private ?string $email = null;
 
@@ -64,6 +66,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
+
+    #[ORM\Column(length: 50, nullable: true)]
+    #[Assert\NotBlank]
+    private ?string $firstname = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    #[Assert\NotBlank]
+    private ?string $lastname = null;
+
+    #[ORM\Column(options: ['default' => true])]
+    private bool $isVerified = true;
 
     public function getId(): ?int
     {
@@ -163,5 +176,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __unserialize(array $data): void
     {
         [$this->id, $this->username, $this->password] = $data;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(?string $firstname): static
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(?string $lastname): static
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
     }
 }

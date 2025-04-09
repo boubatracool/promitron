@@ -68,7 +68,7 @@
 
             <trans-unit id="title.homepage">
                 <source>title.homepage</source>
-                <target><![CDATA[Mirë se erdhe në aplikacionin <strong>“Symfony Demo”</strong>]]></target>
+                <target><![CDATA[Mirë se erdhe në aplikacionin <strong>“Promitron”</strong>]]></target>
             </trans-unit>
             <trans-unit id="title.source_code">
                 <source>title.source_code</source>
@@ -437,11 +437,11 @@
 
             <trans-unit id="rss.title">
                 <source>rss.title</source>
-                <target>“Symfony Demo” blog</target>
+                <target>“Promitron” blog</target>
             </trans-unit>
             <trans-unit id="rss.description">
                 <source>rss.description</source>
-                <target>Postimet më të reja të publikuara në “Symfony Demo” blog</target>
+                <target>Postimet më të reja të publikuara në “Promitron” blog</target>
             </trans-unit>
 
             <trans-unit id="paginator.previous">
