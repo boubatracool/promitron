@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VenteArticle index{% endblock %}
+
+{% block body %}
+    <h1>VenteArticle index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prix</th>
+                <th>Quantite</th>
+                <th>Montant</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vente_article in vente_articles %}
+            <tr>
+                <td>{{ vente_article.id }}</td>
+                <td>{{ vente_article.prix }}</td>
+                <td>{{ vente_article.quantite }}</td>
+                <td>{{ vente_article.montant }}</td>
+                <td>
+                    <a href="{{ path('app_vente_article_show', {'id': vente_article.id}) }}">show</a>
+                    <a href="{{ path('app_vente_article_edit', {'id': vente_article.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_vente_article_new') }}">Create new</a>
+{% endblock %}
